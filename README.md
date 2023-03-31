@@ -16,4 +16,4 @@ This is a simple quiz application like KBC created using React.
 
 ## Usage
 
-- Once the application is running, you can play the game.
+Once the application is running, you can play the game.
