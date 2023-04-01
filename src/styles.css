@@ -1,6 +1,7 @@
 :root {
   --color-white: #fff;
-  --color-all-black: rgba(0, 0, 0, 0);
+  --color-gradient-black: rgba(0, 0, 0, 0);
+  --color-all-black: #000;
   --color-black: #121212;
   --color-gray-1: #363636;
   --color-gray-2: #888888;
@@ -11,7 +12,7 @@
   --color-gray-7: #555;
   --color-blue: #5367FF;
   --color-blue-light: #98A4FF;
-  --color-green: #17c083;
+  --color-green: #008000;
   --color-orange: #ff5d01;
   --color-purple: #9669c6;
   --color-red: #ff1639;
@@ -21,6 +22,12 @@
   --color-white-1: #d3d3d3;
   --color-white-2: #efefef;
   --color-bg: #020230;
+  --color-teal: rgb(0, 128, 128);
+  --color-question: #100241;
+  --color-answer-1: #0e0124;
+  --color-answer-2: #22074d;
+  --color-active: #0000cd;
+  --color-wrong: #dc143c;
 }
 
 *,
@@ -46,11 +53,219 @@ body {
 
 .main {
   width: 75%;
-  background: linear-gradient(to bottom, var(--color-all-black), var(--color-bg)), url(./assets/bg.jpg) center;
+  background: linear-gradient(to bottom, var(--color-gradient-black), var(--color-bg)), url(./assets/bg.jpg) center;
   display: flex;
   flex-direction: column;
 }
 
+.top {
+  height: 50%;
+  position: relative;
+}
+
+.timer {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 5px solid var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+  position: absolute;
+  bottom: 10px;
+  left: 80px;
+}
+
+.bottom {
+  height: 50%;
+}
+
 .pyramid {
   width: 25%;
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.moneyList {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+}
+
+.moneyListItem {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.moneyList.selected,
+.moneyListItem.active {
+  background-color: var(--color-teal);
+}
+
+.moneyListItemNumber {
+  width: 30%;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.moneyListItemAmount {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* Trivia.jsx */
+
+.trivia {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.question {
+  width: 80%;
+  background: linear-gradient(var(--color-question), var(--color-all-black));
+  border: 2px solid var(--color-white);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.answers {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.answer {
+  width: 40%;
+  padding: 10px;
+  text-align: center;
+  background: linear-gradient(var(--color-answer-1), var(--color-answer-2));
+  border: 1px solid var(--color-white);
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 300;
+  margin: 0 10px 20px 10px;
+  cursor: pointer;
+}
+
+
+
+.answer:hover,
+.answer:active {
+  background: var(--color-active);
+}
+
+.answer.correct {
+  animation: correct 3s forwards;
+}
+
+.answer.selected {
+  background: var(--color-teal);
+}
+
+@keyframes correct {
+
+  0%,
+  22%,
+  42% {
+    background: var(--color-active);
+  }
+
+  20%,
+  40%,
+  60% {
+    background: linear-gradient(var(--color-answer-1), var(--color-answer-2));
+  }
+
+  62%,
+  100% {
+    background: var(--color-green);
+  }
+}
+
+.answer.wrong {
+  animation: wrong 3s forwards;
+}
+
+@keyframes wrong {
+
+  0%,
+  22%,
+  42% {
+    background: var(--color-active);
+  }
+
+  20%,
+  40%,
+  60% {
+    background: linear-gradient(var(--color-answer-1), var(--color-answer-2));
+  }
+
+  62%,
+  100% {
+    background: var(--color-wrong);
+  }
+}
+
+.endText {
+  position: relative;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Start.jsx */
+
+.start {
+  width: 250px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.startInput {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.startInput:focus {
+  outline: none;
+}
+
+.startButton {
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 150;
+}
+
+/* Timer.jsx */
